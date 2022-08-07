@@ -1,25 +1,44 @@
 import logo from './logo.svg';
-import './App.css';
+import {
+  BrowserRouter as Router, Link, Route, Routes, Routes as Switch,
+  
+} from "react-router-dom";
 
-function App() {
+import './App.css';
+import Room from './Room';
+import Login from './Login';
+import SignUp from './Signup';
+import { useEffect, useState } from 'react';
+
+export default function App() {
+
+ 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+  <div className='app'>
+      <Router>
+      <div>
+        <nav>
+          <ul>
+            <li>
+              <Link to="/signup">Signup</Link>
+              <Link to="/room/:email">Room</Link>
+
+            </li>
+           
+          </ul>
+        </nav>
+
+        {/* A <Switch> looks through its children <Route>s and
+            renders the first one that matches the current URL. */}
+      <Routes>
+      <Route exact path="/" element={<Login />} />
+      <Route exact path="/signup" element={<SignUp />} />
+
+      <Route exact path="/room/:email" element={<Room />} />
+      </Routes>
+      </div>
+    </Router>
+  </div>
   );
 }
 
-export default App;
